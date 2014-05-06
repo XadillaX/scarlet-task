@@ -13,7 +13,7 @@ For rembembering this and for my favorite [Flandre Scarlet](http://touhou.wikia.
 Usefulness
 ------------
 
-For one situation, once you want to crawl one website. If you use primitive `node.js`, it will like you're ***DDOS***ing that website.
+For one situation, once you want to crawl one website. If you use primitive `node.js`, it will like you're DDOSing that website.
 
 So you need a task queue to help you. It will process tasks in queue one by one.
 
