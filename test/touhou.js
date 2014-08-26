@@ -46,6 +46,8 @@ function parseIndex(taskObject) {
                 var reg = /<h3 class="browse-title">\s*<a title=".*" href=".*">.*<\/a>\s*<\/h3>/g;
                 var result = html.match(reg);
 
+                if(null === result) result = [];
+
                 callback(null, result);
             });
         }
