@@ -51,6 +51,7 @@ function processor(taskObject) {
     // blahblah...
     
     taskQueue.taskDone(taskObject);
+    console.log(taskQueue.numberOfProcessed());
 };
 ```
 
@@ -74,6 +75,12 @@ eg.
 ```javascript
 taskQueue.taskDone(taskObject, true);
 taskQueue.push(task, processor, true);
+```
+
+You can reset the number of processed tasks as well:
+
+```javascript
+taskQueue.resetNumberOfProcessed();
 ```
 
 Author
