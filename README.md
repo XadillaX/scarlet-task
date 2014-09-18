@@ -83,6 +83,18 @@ You can reset the number of processed tasks as well:
 taskQueue.resetNumberOfProcessed();
 ```
 
+And you can set an after-finish function so that Scarlet will call it after a certain number of tasks finished.
+
+```javascript
+taskQueue.afterFinish(20, done, false);
+// this will call done() after 20 tasks done without loop (means only once unless you reset number of processed).
+
+taskQueue.clearAfterFinish();
+// You can clear after finish processor
+```
+
+> See more reference at `test/afterfinish.js`.
+
 Author
 ------------
 
