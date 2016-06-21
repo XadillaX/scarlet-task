@@ -1,17 +1,14 @@
-Scarlet Task
-============
+# Scarlet Task
 
 A task queue module for node.js. You can set several children-queue for one task queue.
 
-Why named Scarlet? ๛ก(ｰ̀ωｰ́ก)
-------------
+## Why named Scarlet? ๛ก(ｰ̀ωｰ́ก)
 
 At first, I wrote this module is for searching one song in [萌否收音機](moe.fm). And last I found that song named <[the Embodiment of Scarlet Devil](http://moe.fm/listen?song=79922)>.
 
 For rembembering this and for my favorite [Flandre Scarlet](http://touhou.wikia.com/wiki/Flandre_Scarlet), I named this module `Scarlet Task`.
 
-Usefulness
-------------
+## Usefulness
 
 For one situation, once you want to crawl one website. If you use primitive `node.js`, it will like you're DDOSing that website.
 
@@ -21,15 +18,13 @@ What's more, you can set that one queue has several children-queue to work concu
 
 And you can use it at any other situation that suitable.
 
-Installation
-------------
+## Installation
 
 ```shell
 $ npm install scarlet-task
 ```
 
-Tutorials
-------------
+## Tutorials
 
 Require the module at first and instantiate an object.
 
@@ -50,12 +45,13 @@ function processor(taskObject) {
     // Do something...
     // blahblah...
     
-    taskQueue.taskDone(taskObject);
+    taskObject.done(); // You can call `taskQueue.taskDone(taskObject);` either
+
     console.log(taskQueue.numberOfProcessed());
 };
 ```
 
-> ***Notice:*** In the `processor` function, you should call `taskQueue.taskDone(taskObject)` when you think this task is done. And then the `taskQueue` will process next task. The parameter `taskObject` is a parameter that `taskQueue` passed to you.
+> ***Notice:*** In the `processor` function, you should call `taskObject.done()` or `taskQueue.taskDone(taskObject)` when you think this task is done. And then the `taskQueue` will process next task. The parameter `taskObject` is a parameter that `taskQueue` passed to you.
 
 You can push task(s) at anytime.
 
@@ -73,7 +69,7 @@ See more reference at `test/touhou.js`.
 eg.
 
 ```javascript
-taskQueue.taskDone(taskObject, true);
+taskObject.done(true); // or `taskQueue.taskDone(taskObject, true);`
 taskQueue.push(task, processor, true);
 ```
 
@@ -95,11 +91,8 @@ taskQueue.clearAfterFinish();
 
 > See more reference at `test/afterfinish.js`.
 
-Author
-------------
+## Contribute
 
-Only me - XadillaX so far.
-
-You can contribute your code! You're welcome.
+You're welcome to make pull requests!
 
 「雖然我覺得不怎麼可能有人會關注我」
