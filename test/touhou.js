@@ -3,9 +3,7 @@ var async = require("async");
 var TaskQueue = require("../");
 var taskQueue = new TaskQueue(10);
 
-function getItem(list, taskObject) {
-    var url = taskObject.task.url;
-
+function getItem(list) {
     if(!list || !list.length) {
         return;
     }
@@ -19,21 +17,21 @@ function getItem(list, taskObject) {
             continue;
         }
 
-        console.log("  [" + result[2] + "] - 「" + result[3] + "」(" + result[1] + ")")
+        console.log("  [" + result[2] + "] - 「" + result[3] + "」(" + result[1] + ")");
     }
 }
 
 function parseAlbum(taskObject) {
     var url = taskObject.task.url;
 
-    spidex.get(url, function(html, status) {
+    spidex.get(url, function(html) {
         var reg = /<div class="item-inner gray">\s*<a.* href=".*">(\d*:\d*).*<\/a>\s*<\/div>[\s\S]*?<a class="block" href="http:\/\/moe.fm\/song\/(.*)">(.*)<\/a>/g;
         var result = html.match(reg);
 
         getItem(result, taskObject);
 
-        taskQueue.taskDone(taskObject, true);
-    }).on("error", function(err) {
+        taskObject.done(true);
+    }).on("error", function() {
         parseAlbum(taskObject);
     });
 }
@@ -42,7 +40,7 @@ function parseIndex(taskObject) {
     var url = taskObject.task.url;
     async.waterfall([
         function(callback) {
-            spidex.get(url, function(html, status) {
+            spidex.get(url, function(html) {
                 var reg = /<h3 class="browse-title">\s*<a title=".*" href=".*">.*<\/a>\s*<\/h3>/g;
                 var result = html.match(reg);
 

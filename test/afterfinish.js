@@ -9,7 +9,7 @@ var taskQueue = new TaskQueue(10);
 
 function process(TO) {
     console.log("Doing task [" + TO.task + "]...");
-    taskQueue.taskDone(TO);
+    TO.done();
 }
 
 taskQueue.afterFinish(20, function() {
