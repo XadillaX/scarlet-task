@@ -16,4 +16,4 @@
  *                                   -- XadillaX
  *                                    05/06/2014
  */
-module.exports = require("./lib/taskQueue");
+module.exports = require("./lib/task_queue");
