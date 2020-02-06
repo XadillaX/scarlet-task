@@ -1,6 +1,6 @@
 {
   "name": "scarlet-task",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A task queue module for node.js. You can set several children-queue for one task queue.",
   "main": "index.js",
   "types": "index.d.ts",
