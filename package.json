@@ -3,19 +3,19 @@
   "version": "1.0.0",
   "description": "A task queue module for node.js. You can set several children-queue for one task queue.",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
+  "types": "index.d.ts",
+  "files": [
+    "lib",
+    "index.d.ts",
+    "index.js"
+  ],
   "dependencies": {
     "spidex": "^2.1.1",
-    "async": "^1.5.2",
-    "snyk": "^1.189.0"
+    "async": "^1.5.2"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node test/touhou.js",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "test": "node test/touhou.js"
   },
   "keywords": [
     "task",
@@ -31,6 +31,5 @@
   "bugs": {
     "url": "https://github.com/XadillaX/scarlet-task/issues"
   },
-  "homepage": "https://github.com/XadillaX/scarlet-task",
-  "snyk": true
+  "homepage": "https://github.com/XadillaX/scarlet-task"
 }
