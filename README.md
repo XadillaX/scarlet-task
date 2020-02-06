@@ -6,7 +6,7 @@ A task queue module for node.js. You can set several children-queue for one task
 
 ## Why named Scarlet? ๛ก(ｰ̀ωｰ́ก)
 
-At first, I wrote this module is for searching one song in [萌否收音機](moe.fm). And last I found that song named <[the Embodiment of Scarlet Devil](http://moe.fm/listen?song=79922)>.
+At first, I wrote this module is for searching one song in [萌否收音機](https://moe.fm). And last I found that song named <[the Embodiment of Scarlet Devil](https://moe.fm/listen?song=79922)>.
 
 For rembembering this and for my favorite [Flandre Scarlet](http://touhou.wikia.com/wiki/Flandre_Scarlet), I named this module `Scarlet Task`.
 

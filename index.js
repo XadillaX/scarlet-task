@@ -1,3 +1,5 @@
+"use strict";
+
 /**
  * Nyaa ヾ(●゜▽゜●)♡ ～ This module name is to remember its
  * initial use for me - to find a touhou project
