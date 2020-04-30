@@ -11,11 +11,14 @@
   ],
   "dependencies": {
     "spidex": "^2.1.1",
-    "async": "^1.5.2"
+    "async": "^1.5.2",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node test/touhou.js"
+    "test": "node test/touhou.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "keywords": [
     "task",
@@ -31,5 +34,6 @@
   "bugs": {
     "url": "https://github.com/XadillaX/scarlet-task/issues"
   },
-  "homepage": "https://github.com/XadillaX/scarlet-task"
+  "homepage": "https://github.com/XadillaX/scarlet-task",
+  "snyk": true
 }
