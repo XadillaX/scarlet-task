@@ -11,7 +11,7 @@
   ],
   "dependencies": {
     "spidex": "^2.1.1",
-    "async": "^1.5.2"
+    "async": "^3.2.2"
   },
   "devDependencies": {},
   "scripts": {
