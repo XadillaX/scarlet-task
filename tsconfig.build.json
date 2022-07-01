@@ -5,7 +5,8 @@
   },
   "exclude": [
     "test",
-    "lib"
+    "lib",
+    "examples"
   ]
 }
 
