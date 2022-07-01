@@ -1,21 +1,26 @@
 {
   "name": "scarlet-task",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "A task queue module for node.js. You can set several children-queue for one task queue.",
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
-    "lib",
-    "index.d.ts",
-    "index.js"
+    "lib"
   ],
-  "dependencies": {
-    "spidex": "^2.1.1",
-    "async": "^3.2.2"
+  "dependencies": {},
+  "module": "commonjs",
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "eslint": "^8.18.0",
+    "eslint-config-egg": "^12.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "spidex": "^2.2.1",
+    "typescript": "^4.7.4"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "node test/touhou.js"
+    "test": "node test/touhou.js",
+    "build": "tsc -p ./tsconfig.build.json",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "task",

@@ -10,7 +10,7 @@ At first, I wrote this module is for searching one song in [萌否收音機](htt
 
 For rembembering this and for my favorite [Flandre Scarlet](http://touhou.wikia.com/wiki/Flandre_Scarlet), I named this module `Scarlet Task`.
 
-## Usefulness
+## Usage
 
 For one situation, once you want to crawl one website. If you use primitive `node.js`, it will like you're DDOSing that website.
 
@@ -23,7 +23,7 @@ And you can use it at any other situation that suitable.
 ## Installation
 
 ```shell
-$ npm install scarlet-task
+$ npm install --save scarlet-task
 ```
 
 ## Tutorials
@@ -31,7 +31,7 @@ $ npm install scarlet-task
 Require the module at first and instantiate an object.
 
 ```javascript
-var TaskQueue = require("scarlet-task");
+var { Scarlet } = require("scarlet-task");
 var taskQueue = new TaskQueue(10);
 ```
 
@@ -42,14 +42,14 @@ Define a `processor` function for one task. In fact, you can pass an anonymous f
 ```javascript
 function processor(taskObject) {
 	// get task object
-    var task = taskObject.task;
-    
-    // Do something...
-    // blahblah...
-    
-    taskObject.done(); // You can call `taskQueue.taskDone(taskObject);` either
+  var task = taskObject.task;
+  
+  // Do something...
+  // blahblah...
+  
+  taskObject.done(); // You can call `taskQueue.taskDone(taskObject);` either
 
-    console.log(taskQueue.numberOfProcessed());
+  console.log(taskQueue.numberOfProcessed());
 };
 ```
 
@@ -91,7 +91,23 @@ taskQueue.clearAfterFinish();
 // You can clear after finish processor
 ```
 
-> See more reference at `test/afterfinish.js`.
+> See more reference at `examples/hackernews.js`.
+
+## Migrate From v1.x to v2.x
+
+`scarlet-task` v1.x exports `Scarlet` directly:
+
+```js
+const Scarlet = require('scarlet-task');
+```
+
+While v2.x exports like this:
+
+```js
+const { Scarlet } = require('scarlet-task');
+```
+
+Just replace the requirement.
 
 ## Contribute
 
