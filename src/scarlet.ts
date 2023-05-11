@@ -12,6 +12,13 @@ interface IQueuingItem<T> {
 }
 type IQueuingItemArray<T> = IQueuingItem<T>[];
 
+let asyncRun: (callback: () => any) => void;
+if (!globalThis.process?.nextTick) {
+  asyncRun = queueMicrotask;
+} else {
+  asyncRun = process.nextTick.bind(process);
+}
+
 export class Scarlet {
   static TaskObject: typeof TaskObject;
 
@@ -42,7 +49,7 @@ export class Scarlet {
         console.log(`Scarlet done (${this.queue.map(q => q.length).join(', ')})`);
       }
 
-      process.nextTick(() => {
+      asyncRun(() => {
         this.#runTask(queueId);
       });
     });
@@ -101,7 +108,7 @@ export class Scarlet {
     // Start the queue if it's not running
     if (!this.running[min]) {
       this.running[min] = true;
-      process.nextTick(() => {
+      asyncRun(() => {
         this.#runTask(min);
       });
     }
@@ -110,7 +117,7 @@ export class Scarlet {
   taskDone<T>(taskObject: TaskObject<T>, debugStr?: boolean) {
     if (taskObject.hasDone) return;
 
-    process.nextTick(() => {
+    asyncRun(() => {
       this.emitter.emit('done', taskObject.queueId, !!debugStr);
     });
 
@@ -144,4 +151,3 @@ export class Scarlet {
     this.afterFinishLoop = false;
   }
 }
-

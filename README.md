@@ -26,6 +26,12 @@ And you can use it at any other situation that suitable.
 $ npm install --save scarlet-task
 ```
 
+If you're using it in browser, you may need to install `events` as well.
+
+```shell
+$ npm install --save events
+```
+
 ## Tutorials
 
 Require the module at first and instantiate an object.
