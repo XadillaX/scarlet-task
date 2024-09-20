@@ -2,23 +2,27 @@
 
 ![Flandre Scarlet](scarlet.gif)
 
-A task queue module for node.js. You can set several children-queue for one task queue.
+Scarlet Task is an advanced task queue module for Node.js, featuring the ability to configure multiple child queues for
+a single task queue.
 
 ## Why named Scarlet? ๛ก(ｰ̀ωｰ́ก)
 
-At first, I wrote this module is for searching one song in [萌否收音機](https://moe.fm). And last I found that song named <[the Embodiment of Scarlet Devil](https://moe.fm/listen?song=79922)>.
+The story behind this module's name is quite serendipitous. One day, while browsing [萌否收音機](https://moe.fm), I
+stumbled upon a captivating song. Though its title slipped my mind, I distinctly remembered its considerable length.
 
-For rembembering this and for my favorite [Flandre Scarlet](http://touhou.wikia.com/wiki/Flandre_Scarlet), I named this module `Scarlet Task`.
+Driven by a desire to rediscover this elusive track, I developed this queue module. It allowed me to perform an
+exhaustive search across the entire Moe FM platform. After a thorough exploration, I finally unearthed the song that had
+been haunting my memory: <[the Embodiment of Scarlet Devil](https://moe.fm/listen?song=79922)>.
 
-## Usage
+To commemorate this musical treasure hunt and pay homage to my favorite character,
+[Flandre Scarlet](http://touhou.wikia.com/wiki/Flandre_Scarlet), I christened this module 'Scarlet Task'.
+It's a nod to both the journey of rediscovery and the Scarlet-themed song that sparked it all.
 
-For one situation, once you want to crawl one website. If you use primitive `node.js`, it will like you're DDOSing that website.
+## Use Case
 
-So you need a task queue to help you. It will process tasks in queue one by one.
-
-What's more, you can set that one queue has several children-queue to work concurrently.
-
-And you can use it at any other situation that suitable.
+Scarlet Task is particularly useful for scenarios requiring controlled asynchronous operations, such as web crawling. By
+allowing you to set up multiple child queues, it enables concurrent processing while maintaining control over
+parallelism, preventing issues like unintentional DDoS-like behavior on target websites.
 
 ## Installation
 
@@ -59,7 +63,9 @@ function processor(taskObject) {
 };
 ```
 
-> ***Notice:*** In the `processor` function, you should call `taskObject.done()` or `taskQueue.taskDone(taskObject)` when you think this task is done. And then the `taskQueue` will process next task. The parameter `taskObject` is a parameter that `taskQueue` passed to you.
+> ***Notice:*** In the `processor` function, you should call `taskObject.done()` or `taskQueue.taskDone(taskObject)`
+> when you think this task is done. And then the `taskQueue` will process next task. The parameter `taskObject` is a
+> parameter that `taskQueue` passed to you.
 
 You can push task(s) at anytime.
 

@@ -1,7 +1,7 @@
 {
   "name": "scarlet-task",
-  "version": "2.1.0",
-  "description": "A task queue module for node.js. You can set several children-queue for one task queue.",
+  "version": "3.0.0",
+  "description": "An advanced task queue module for Node.js with support for multiple child queues, enabling controlled concurrent processing of asynchronous tasks.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
@@ -18,7 +18,7 @@
     "typescript": "^4.7.4"
   },
   "scripts": {
-    "example": "node example/hackernews.js",
+    "example": "node examples/hackernews.js",
     "build": "tsc -p ./tsconfig.build.json",
     "prepublish": "npm run build"
   },
