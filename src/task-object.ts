@@ -26,8 +26,6 @@ export class TaskObject<T> {
    */
   done() {
     if (this.hasDone) return;
-
     this.#scarlet.taskDone(this);
-    this.hasDone = true;
   }
 }

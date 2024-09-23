@@ -1,6 +1,17 @@
-# Scarlet Task
+<p align="center">
+  <img src="scarlet.gif" alt="Scarlet Task">
+</p>
 
-![Flandre Scarlet](scarlet.gif)
+<h1 align="center">Scarlet Task</h1>
+
+<p align="center">
+  <a href="https://coveralls.io/github/XadillaX/scarlet-task?branch=master">
+    <img src="https://coveralls.io/repos/github/XadillaX/scarlet-task/badge.svg?branch=master" alt="Coverage Status">
+  </a>
+  <a href="https://github.com/XadillaX/scarlet-task/actions">
+    <img src="https://github.com/XadillaX/scarlet-task/workflows/Node.js%20CI/badge.svg" alt="Build Status">
+  </a>
+</p>
 
 Scarlet Task is an advanced task queue module for Node.js, featuring the ability to configure multiple child queues for
 a single task queue.
@@ -38,88 +49,102 @@ $ npm install --save events
 
 ## Tutorials
 
-Require the module at first and instantiate an object.
+First, require the module and instantiate a Scarlet object:
 
 ```javascript
-var { Scarlet } = require("scarlet-task");
-var taskQueue = new TaskQueue(10);
+const { Scarlet } = require("scarlet-task");
+const scarlet = new Scarlet(10);
 ```
 
-> The parameter for `constructor` means number of children-queue. Pass no parameter for default 1 children-queue.
+> The parameter for the `constructor` represents the number of child queues. If no parameter is passed, it defaults to 1 child queue.
 
-Define a `processor` function for one task. In fact, you can pass an anonymous function.
+Define a `processor` function to handle tasks. You can also pass an anonymous function:
 
 ```javascript
 function processor(taskObject) {
-	// get task object
-  var task = taskObject.task;
+  // Get the task object
+  const task = taskObject.task;
   
-  // Do something...
-  // blahblah...
+  // Perform task logic...
+  // ...
   
-  taskObject.done(); // You can call `taskQueue.taskDone(taskObject);` either
+  taskObject.done(); // Or call `scarlet.taskDone(taskObject);`
 
-  console.log(taskQueue.numberOfProcessed());
-};
+  console.log(scarlet.numberOfProcessed());
+}
 ```
 
-> ***Notice:*** In the `processor` function, you should call `taskObject.done()` or `taskQueue.taskDone(taskObject)`
-> when you think this task is done. And then the `taskQueue` will process next task. The parameter `taskObject` is a
-> parameter that `taskQueue` passed to you.
+> **Note:** In the `processor` function, you should call `taskObject.done()` or `scarlet.taskDone(taskObject)` when you consider the task complete. Then `scarlet` will process the next task. The `taskObject` parameter is passed to you by the `scarlet` instance.
 
-You can push task(s) at anytime.
-
-The task object can be any type - string, number, json, etc.
+You can push tasks into the queue at any time. The task object can be of any type - string, number, JSON, etc.:
 
 ```javascript
-var task = "it may be a url, or an object that process can do something with this task object.";
-taskQueue.push(task, processor);
+const task = "This could be a URL, or an object that the processor can handle";
+scarlet.push(task, processor);
 ```
 
-See more reference at `test/touhou.js`.
+For more reference, see `test/hackernews.test.ts`.
 
-> What's more, if you want to see the queue status for debuging, you can pass `true` to `taskDone` and `push`.
-
-eg.
+You can reset the number of processed tasks:
 
 ```javascript
-taskObject.done(true); // or `taskQueue.taskDone(taskObject, true);`
-taskQueue.push(task, processor, true);
+scarlet.resetNumberOfProcessed();
 ```
 
-You can reset the number of processed tasks as well:
+You can also set an after-finish callback function that Scarlet will call after a specified number of tasks are completed:
 
 ```javascript
-taskQueue.resetNumberOfProcessed();
+scarlet.afterFinish(20, done, false);
+// This will call done() after 20 tasks are completed, without looping (meaning it executes only once unless you reset the processed count)
+
+scarlet.clearAfterFinish();
+// You can clear the afterFinish processor
 ```
 
-And you can set an after-finish function so that Scarlet will call it after a certain number of tasks finished.
+> For more reference, see `test/hackernews.test.ts`.
+
+## APIs
+
+### `Scarlet`
+
+#### Constructor
 
 ```javascript
-taskQueue.afterFinish(20, done, false);
-// this will call done() after 20 tasks done without loop (means only once unless you reset number of processed).
-
-taskQueue.clearAfterFinish();
-// You can clear after finish processor
+const scarlet = new Scarlet(queueCount);
 ```
 
-> See more reference at `examples/hackernews.js`.
+- `queueCount` (optional): Number of child queues. Defaults to 1 if not specified.
 
-## Migrate From v1.x to v2.x
+#### Methods
 
-`scarlet-task` v1.x exports `Scarlet` directly:
+- `push(task, processor)`: Adds a new task to the queue.
+  - `task`: The task to be processed (can be any type).
+  - `processor`: Function to process the task.
 
-```js
-const Scarlet = require('scarlet-task');
-```
+- `numberOfProcessed()`: Returns the number of processed tasks.
 
-While v2.x exports like this:
+- `resetNumberOfProcessed()`: Resets the count of processed tasks to 0.
 
-```js
-const { Scarlet } = require('scarlet-task');
-```
+- `taskDone(taskObject)`: Marks a task as completed.
+  - `taskObject`: The task object to be marked as done.
 
-Just replace the requirement.
+- `afterFinish(count, processor, loop)`: Sets a callback to be executed after a certain number of tasks are completed.
+  - `count`: Number of tasks to complete before calling the processor.
+  - `processor`: Function to be called after `count` tasks are completed.
+  - `loop` (optional): If true, the processor will be called repeatedly every `count` tasks. Defaults to false.
+
+- `clearAfterFinish()`: Clears the after-finish processor.
+
+### `TaskObject`
+
+#### Properties
+
+- `task`: The task data.
+- `queueId`: The ID of the queue processing this task.
+
+#### Methods
+
+- `done()`: Marks the task as completed.
 
 ## Contribute
 

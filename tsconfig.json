@@ -22,6 +22,7 @@
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
     "types": [
+      "mocha",
       "node"
     ],
     "allowSyntheticDefaultImports": true,

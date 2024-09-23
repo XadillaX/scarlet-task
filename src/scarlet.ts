@@ -12,6 +12,7 @@ interface IQueuingItem<T> {
 }
 
 let asyncRun: (callback: () => any) => void;
+/* istanbul ignore next */
 if (!globalThis.process?.nextTick) {
   asyncRun = queueMicrotask;
 } else {
@@ -42,6 +43,10 @@ export class Scarlet {
    * @param {number} queueCount The number of queues to create.
    */
   constructor(queueCount = 1) {
+    if (queueCount <= 0 || !Number.isInteger(queueCount)) {
+      throw new Error(`Invalid queueCount: ${queueCount}. It must be a positive integer.`);
+    }
+
     this.queueCount = queueCount;
 
     for (let i = 0; i < queueCount; i++) {
@@ -137,6 +142,7 @@ export class Scarlet {
    */
   taskDone<T>(taskObject: TaskObject<T>) {
     if (taskObject.hasDone) return;
+    taskObject.hasDone = true; // 立即设置 hasDone 为 true
     const queueId = taskObject.queueId;
     asyncRun(() => this.emitter.emit('done', queueId));
   }

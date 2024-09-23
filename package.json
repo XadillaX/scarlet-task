@@ -7,20 +7,47 @@
   "files": [
     "lib"
   ],
-  "dependencies": {},
   "module": "commonjs",
   "devDependencies": {
+    "@types/mocha": "^10.0.8",
     "@types/node": "^18.0.0",
+    "@types/should": "^13.0.0",
+    "@types/sinon": "^17.0.3",
     "eslint": "^8.18.0",
     "eslint-config-egg": "^12.0.0",
     "eslint-plugin-import": "^2.26.0",
+    "mocha": "^10.7.3",
+    "nyc": "^15.1.0",
+    "should": "^13.2.3",
+    "sinon": "^19.0.2",
     "spidex": "^2.2.1",
-    "typescript": "^4.7.4"
+    "ts-node": "^10.9.2",
+    "typescript": "^4.7.4",
+    "coveralls": "^3.1.1"
   },
   "scripts": {
+    "test": "nyc --reporter=lcov --reporter=text-summary mocha -r ts-node/register 'test/**/*.test.ts'",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "example": "node examples/hackernews.js",
     "build": "tsc -p ./tsconfig.build.json",
     "prepublish": "npm run build"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "all": true,
+    "check-coverage": true,
+    "lines": 80,
+    "statements": 80,
+    "functions": 80,
+    "branches": 80
   },
   "keywords": [
     "task",
